@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "57600796054",
+    "project_id": "oktv-d6134",
+    "storage_bucket": "oktv-d6134.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57600796054:android:00671864aba89fb83ce9b7",
+        "android_client_info": {
+          "package_name": "com.kantayo.oktvv2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu4MTWU8mfkPFA-inBg8J7p6WNh2L8_Gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
