@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:oktvv2/data/datasource/remote/youtube/implement_youtube_remote_data_source.dart';
 import 'package:oktvv2/main.dart';
 import 'package:flutter/material.dart';
 import 'package:oktvv2/presentation/utility/constants.dart';
 import 'package:oktvv2/presentation/utility/custom_voice_to_text.dart';
 import 'package:oktvv2/presentation/utility/get_default_url.dart';
 import 'package:oktvv2/presentation/utility/size_config.dart';
+import 'package:oktvv2/presentation/viewmodel/youtube_viewmodel.dart';
 import 'package:oktvv2/presentation/widgets/alert_dialog/confirm_delete_dialog.dart';
 import 'package:oktvv2/presentation/widgets/alert_dialog/dialog_contact_developer.dart';
 import 'package:oktvv2/presentation/widgets/alert_dialog/dialog_display_search_info.dart';
@@ -32,6 +34,7 @@ class NewHomepage extends StatefulWidget {
 
 class _NewHomepageState extends State<NewHomepage> {
 
+  ImplementYoutubeRemoteDataSource dataSource = ImplementYoutubeRemoteDataSource();
   late YoutubePlayerController _playerController;
   //late final WebViewController _webViewController;
   final TextEditingController _searchController = TextEditingController();
@@ -162,6 +165,13 @@ class _NewHomepageState extends State<NewHomepage> {
     });
   }
 
+  void _searchVideos(String searchInput) async {
+    if (searchInput.isNotEmpty && searchInput.length > 2) {
+      final viewModel = Provider.of<YoutubeViewmodel>(context, listen: false);
+      viewModel.searchYoutubeVideosViewmodel(searchInput: searchInput);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -185,6 +195,7 @@ class _NewHomepageState extends State<NewHomepage> {
 
     _playerController.addListener(_videoListener);
     _validatePlayingDefaultUrl(_currentPlayingUrl);
+
     _clearTextField();
     _voiceToText = CustomVoiceToText(
       stopFor: 6,
@@ -1244,9 +1255,11 @@ class _NewHomepageState extends State<NewHomepage> {
         ),
         child: InkWell(
           onTap: () {
+            //dataSource.searchYoutubeVideos('flow g');
             if (_textResult.isNotEmpty) {
               setState(() {
                 _isBrowser = !_isBrowser;
+                _searchVideos(_textResult);
               });
             } else {
               showToastWidget('You must enter a text', global.errorColor);

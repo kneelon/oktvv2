@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:oktvv2/data/datasource/remote/firebase_remote_datasource.dart';
-import 'package:oktvv2/data/model/search_model.dart';
+import 'package:oktvv2/data/datasource/remote/firebase/firebase_remote_datasource.dart';
+import 'package:oktvv2/data/model/firebase/search_model.dart';
 import 'package:oktvv2/presentation/utility/constants.dart';
 
 class ImplementFirebaseRemoteDatasource implements FirebaseRemoteDatasource {

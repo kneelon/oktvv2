@@ -23,6 +23,19 @@ class AppStrings {
   static const String favUrlList = 'favUrlList';
   static const String favTitleList = 'favTitleList';
   static const String link = 'link';
+  static const String kind = 'kind';
+  static const String etag = 'etag';
+  static const String nextPageToken = 'nextPageToken';
+  static const String regionCode = 'regionCode';
+  static const String pageInfo = 'pageInfo';
+  static const String items = 'items';
+  static const String snippet = 'snippet';
+  static const String publishedAt = 'publishedAt';
+  static const String liveBroadcastContent = 'liveBroadcastContent';
+  static const String publishTime = 'publishTime';
+  static const String totalResults = 'totalResults';
+  static const String resultsPerPage = 'resultsPerPage';
+
 
 
   static const String capCancel  = 'Cancel';
@@ -31,9 +44,14 @@ class AppStrings {
   static const String capAdd  = 'Add';
   static const String capDelete  = 'Delete';
   static const String capTitle  = 'Title';
+  static const String capAccept = 'Accept';
+  static const String capAuthorization = 'Authorization';
+  static const String capApplication = 'Application';
+  static const String capBearer = 'Bearer';
 
 
   static const String capsAdd  = 'ADD';
+  static const String capsGet = 'GET';
 
 
   static const String wordViewList  = 'VIEW LIST';
@@ -50,4 +68,17 @@ class AppStrings {
 
 
   static const String cTime = '&t=1s';
+
+
+}
+
+class Api {
+  static const String token = '';
+  static const String apiKey = 'AIzaSyD2TL2Z2XRst4KQG9QenOcOx684ltxMVts';
+  static const String baseUrl = 'https://www.googleapis.com/youtube/v3';
+
+  static const String contentType = 'Content-Type';
+  static const String urlEncoded = 'application/x-www-form-urlencoded';
+  static const String applicationJson = 'application/json';
+
 }

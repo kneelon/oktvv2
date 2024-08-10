@@ -3,16 +3,20 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oktvv2/data/datasource/remote/firebase_remote_datasource.dart';
-import 'package:oktvv2/data/datasource/remote/implement_firebase_remote_datasource.dart';
+import 'package:oktvv2/data/datasource/remote/firebase/firebase_remote_datasource.dart';
+import 'package:oktvv2/data/datasource/remote/firebase/implement_firebase_remote_datasource.dart';
+import 'package:oktvv2/data/datasource/remote/youtube/implement_youtube_remote_data_source.dart';
 import 'package:oktvv2/data/repository/implement_firebase_repository.dart';
+import 'package:oktvv2/data/repository/implement_youtube_repository.dart';
 import 'package:oktvv2/domain/repository/firebase_repository.dart';
 import 'package:oktvv2/domain/usecase/firebase_usecase/fetch_search_data_usecase.dart';
+import 'package:oktvv2/domain/usecase/youtube_usecase/search_youtube_videos_usecase.dart';
 import 'package:oktvv2/firebase_options.dart';
 import 'package:oktvv2/presentation/ui/get_started_page.dart';
 import 'package:oktvv2/presentation/ui/homepage.dart';
 import 'package:oktvv2/presentation/utility/constants.dart';
-import 'package:oktvv2/presentation/viewmodel/firebase_viewmodel/firebase_viewmodel.dart';
+import 'package:oktvv2/presentation/viewmodel/firebase_viewmodel.dart';
+import 'package:oktvv2/presentation/viewmodel/youtube_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,11 +50,15 @@ Future<void> main() async {
   final firebaseRemoteDataSource = ImplementFirebaseRemoteDatasource();
   final firebaseRepository = ImplementFirebaseRepository(firebaseRemoteDataSource);
 
+  final youtubeRemoteDataSource = ImplementYoutubeRemoteDataSource();
+  final youtubeRepository = ImplementYoutubeRepository(youtubeRemoteDataSource);
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<FirebaseViewmodel>(create: (_) => FirebaseViewmodel(FetchSearchDataUsecase(repository: firebaseRepository))),
-        ChangeNotifierProvider(create: (_) => ToggleProvider(), child: MyApp(availableUrl: availableUrl),
+        ChangeNotifierProvider<YoutubeViewmodel>(create: (_) => YoutubeViewmodel(SearchYoutubeVideosUsecase(repository: youtubeRepository))),
+        ChangeNotifierProvider(create: (_) => ToggleProvider(),
         ),
       ],
       child: MyApp(availableUrl: availableUrl)),
@@ -99,7 +107,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   @override
   Widget build(BuildContext context) {
-    //return NewHomepage(availableUrl: widget.availableUrl);
     return GetStartedPage(url: widget.availableUrl);
   }
 }
